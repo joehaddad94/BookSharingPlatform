@@ -1,0 +1,42 @@
+.nav-bg {
+  background-color: rgb(43, 96, 236);
+}
+.primary-bg {
+  background-color: #ff385c;
+}
+
+.light-bg {
+  background-color: #ffafbd;
+}
+
+.secondary-bg {
+  background-color: #faf9f9;
+}
+
+.white-bg {
+  background-color: white;
+}
+
+.black-bg {
+  background-color: black;
+}
+
+.primary-text {
+  color: #ff385c;
+}
+
+.secondary-text {
+  color: #5d5d5d;
+}
+
+.white-text {
+  color: white;
+}
+
+.black-text {
+  color: black;
+}
+
+.light-text {
+  color: #ffafbd;
+}
