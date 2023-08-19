@@ -61,4 +61,8 @@ const register = async (req, res) => {
         }
 }
 
-module.exports = {login, register}
+const verify = (_, res)=>{
+    res.send("Verified")
+}
+
+module.exports = {login, register, verify}

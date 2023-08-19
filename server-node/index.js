@@ -5,8 +5,13 @@ require("dotenv").config()
 
 app.use(express.json())
 
-const authRouter = require("./routes/auth.routes")
+const authMiddleware = require("./middlewares/auth.middleware");
+
+const authRouter = require("./routes/auth.routes");
 app.use("/auth", authRouter)
+
+const postsRouter = require("./routes/posts.routes");
+app.use("/posts", authMiddleware, postsRouter)
 
 app.listen(8000, (err)=>{
     if(err){
