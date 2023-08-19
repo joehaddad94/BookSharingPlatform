@@ -5,6 +5,9 @@ require("dotenv").config()
 
 app.use(express.json())
 
+const authRouter = require("./routes/auth.routes")
+app.use("/auth", authRouter)
+
 app.listen(8000, (err)=>{
     if(err){
         console.error(err)
