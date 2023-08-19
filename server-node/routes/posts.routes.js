@@ -12,7 +12,7 @@ router.get("/get_all_posts", postsController.getAllPosts)
 router.get("/get_followed_posts", postsController.getFollowedPosts)
 router.post("/follow_user", postsController.followUser)
 router.post("/unfollow_user", postsController.unFollowUser)
-router.post("/like_post", postsController.likeBook)
-router.post("/unlike_post", postsController.unLikeBook)
+router.post("/like_post", postsController.likePost)
+router.post("/unlike_post", postsController.unLikePost)
 
 module.exports = router;
