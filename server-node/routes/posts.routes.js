@@ -13,6 +13,6 @@ router.get("/get_followed_posts", postsController.getFollowedPosts)
 router.post("/follow_user", postsController.followUser)
 router.post("/unfollow_user", postsController.unFollowUser)
 router.post("/like_post", postsController.likePost)
-router.post("/unlike_post", postsController.unLikePost)
+router.post("/dislike_post", postsController.disLikePost)
 
 module.exports = router;

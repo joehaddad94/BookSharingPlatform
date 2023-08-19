@@ -134,6 +134,11 @@ const unFollowUser = async (req, res) => {
     try {
         const { userIdToUnfollow } = req.body;
 
+        const userToUnfollow = await User.findById(userIdToUnfollow);
+        if (!userToUnfollow) {
+            return res.status(404).json({ message: "No user to unfollow" });
+        }
+
         await Follower.findOneAndDelete({
             followerId: req.user.id,
             followingId: userIdToUnfollow
@@ -160,6 +165,10 @@ const likePost = async (req, res) => {
             return res.status(404).json({ message: "Post not found" });
         }
 
+        if (user.likes.includes(postId)) {
+            return res.json({ message: "Post already liked by this user" });
+        }
+
         if (!user.likes.includes(postId)) {
             user.likes.push(postId);
             post.likesCount++;
@@ -167,14 +176,19 @@ const likePost = async (req, res) => {
             await post.save();
         }
 
-        res.json({ message: "Post liked successfully" });
+        const updatedPost = await Post.findById(postId);
+
+        res.json({ 
+            message: "Post liked successfully",
+            updatedPost: updatedPost
+        });
     } catch (error) {
         console.error("Error liking Post:", error);
         res.status(500).json({ message: "Internal server error" });
     }
 };
 
-const unLikePost = async (req, res) => {
+const disLikePost = async (req, res) => {
     try {
         const { postId } = req.body;
 
@@ -193,11 +207,18 @@ const unLikePost = async (req, res) => {
             post.likesCount--;
             await user.save();
             await post.save();
+        } else {
+            return res.json({ message: "Post is not liked by this user" });
         }
 
-        res.json({ message: "Post unliked successfully" });
+        const updatedPost = await Post.findById(postId);
+
+        res.json({ 
+            message: "Post disliked successfully",
+            updatedPost: updatedPost
+        });
     } catch (error) {
-        console.error("Error unliking Post:", error);
+        console.error("Error disliking Post:", error);
         res.status(500).json({ message: "Internal server error" });
     }
 };
@@ -211,4 +232,4 @@ module.exports = {
     followUser, 
     unFollowUser,
     likePost,
-    unLikePost }
+    disLikePost }
