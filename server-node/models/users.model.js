@@ -11,7 +11,15 @@ const usersSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    likes: [
+        {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'
+    }]
 }, {
     timestamps: true
 })
+
+const model = mongoose.model("User", usersSchema);
+module.exports = model;
