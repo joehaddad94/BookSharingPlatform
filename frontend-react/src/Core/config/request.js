@@ -1,20 +1,27 @@
 import axios from "axios";
 import { localStorageAction } from "./localstorage.js";
 
-axios.defaults.baseURL = "http://127.0.0.1:8000/api";
+axios.defaults.baseURL = "http://localhost:8000";
 
 export const sendRequest = async ({
-  method ,
+  method,
   route,
   body,
   includeHeaders = true,
+  withCredentials = false,
+  customHeaders = {}, 
 }) => {
   if (!route) throw Error("URL required");
 
   axios.defaults.headers.authorization = includeHeaders
     ? `Bearer ${localStorageAction("token")}`
     : "";
-    console.log(axios.defaults.headers)
+  axios.defaults.withCredentials = withCredentials;
+
+  Object.keys(customHeaders).forEach(header => {
+    axios.defaults.headers[header] = customHeaders[header];
+  });
+
   try {
     const response = await axios.request({
       method,

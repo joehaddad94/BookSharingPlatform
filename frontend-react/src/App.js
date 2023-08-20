@@ -6,6 +6,7 @@ import "./styles/colors.css";
 import "./styles/fonts.css";
 
 import Authorization from "./Pages/Authorization"
+import Landing from "./Pages/Landing"
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path = "/" element = {<Authorization/>} />
+          <Route path = "/Landing" element = {<Landing/>} />
         </Routes>
       </BrowserRouter>
     </div>
