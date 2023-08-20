@@ -1,0 +1,42 @@
+.main-container {
+  gap: 30%;
+}
+
+.link-container {
+  margin-top: 20px;
+  gap: 15%;
+}
+
+.sidebar {
+  width: 300px;
+  height: 100vh;
+  border-right: 1px solid black;
+  padding-left: 20px;
+  background-color: #8973d1;
+}
+
+img {
+  width: 25px;
+  height: 25px;
+}
+
+h2 {
+  color: white;
+}
+
+.link {
+  gap: 5%;
+  align-items: center;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.more-settings {
+  margin-top: 250px;
+}
+
+.bg-dark-purple {
+  background-color: #512b81;
+}

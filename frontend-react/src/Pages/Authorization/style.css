@@ -6,21 +6,26 @@
 
 .main-auth-container {
   height: 100vh;
+  background-color: #512b81;
 }
 
 .auth-container {
   margin: 0 auto;
+  background-color: azure;
+  padding: 20px 20px;
+  border-radius: 20px;
 }
 
 .title {
   font-size: 3rem;
   font-weight: Bold;
+  color: #512b81;
 }
 
 .underline {
   width: 61px;
   height: 6px;
-  background: #007bff;
+  background: #512b81;
   border-radius: 10px;
 }
 
@@ -49,7 +54,7 @@
 }
 
 .submit {
-  background: #007bff;
+  background: #8973d1;
   color: white;
   flex: 1;
   padding: 20px 0;
@@ -59,13 +64,13 @@
 }
 
 .submit:hover {
-  background-color: #0056b3;
+  background-color: #512b81;
 }
 
 .action-toggle-button {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #8973d1;
   color: white;
   font-weight: bold;
   border-radius: 5px;
@@ -74,9 +79,9 @@
 }
 
 .action-toggle-button:hover {
-  background-color: #0056b3;
+  background-color: #512b81;
 }
 
 span {
-  color: #007bff;
+  color: #512b81;
 }

@@ -1,9 +1,10 @@
 import React from 'react';
+import Sidebar from '../../Components/Sidebar';
 
 const Landing = () => {
     return (
         <div>
-            Welcome
+            <Sidebar/>
         </div>
     );
 }
