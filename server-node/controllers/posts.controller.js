@@ -99,15 +99,31 @@ const getFollowedPosts = async (req, res) => {
 
 const followUser = async (req, res) => {
     try {
+        console.log("req.body: ",req.body);
         const { userIdToFollow } = req.body;
+
+        const existingFollower = await Follower.findOne({
+            followerId: req.user.id,
+            followingId: userIdToFollow
+        });
+        console.log(existingFollower)
+        if (existingFollower) {
+            return res.status(400).json({ message: "User is already being followed" });
+        }
         
         const follower = new Follower({
             followerId: req.user.id,
             followingId: userIdToFollow
         });
-
+        
         await follower.save();
-        res.status(201).json({ message: "User followed successfully" });
+
+        const savedFollower = await follower.save();
+
+        res.status(201).json({ 
+            message: "User followed successfully",
+            follower: savedFollower
+         });
     } catch (error) {
         console.error("Error following user:", error);
         res.status(500).json({ message: "Internal server error" });
