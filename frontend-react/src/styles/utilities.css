@@ -23,26 +23,25 @@
 .spaceBetween {
   justify-content: space-between;
 }
-.spaceEvenly{
+.spaceEvenly {
   justify-content: space-around;
 }
-.spaceAround{
+.spaceAround {
   justify-content: space-around;
 }
-
 
 .circular {
   border-radius: 50%;
 }
 
-.circular-10{
+.circular-10 {
   border-radius: 10px;
 }
 
-.circular-20{
+.circular-20 {
   border-radius: 20px;
 }
-.circular-40{
+.circular-40 {
   border-radius: 40px;
 }
 
@@ -75,17 +74,17 @@
   width: 30%;
 }
 
-.width-65{
+.width-65 {
   width: 65%;
 }
-.width-95{
+.width-95 {
   width: 95%;
 }
 
-.width-90{
+.width-90 {
   width: 90%;
 }
-.self-center{
+.self-center {
   justify-self: center;
   align-self: center;
 }
@@ -129,42 +128,41 @@
   cursor: pointer;
 }
 
-.padding-10{
+.padding-10 {
   padding: 15px 5px;
 }
 
-.padding-15{
+.padding-15 {
   padding: 15px;
 }
-.padding-20{
+.padding-20 {
   padding: 20px;
 }
-.padding-35{
+.padding-35 {
   padding: 35px;
 }
-.margin-20{
+.margin-20 {
   margin: 20px 20px;
 }
 
-.margin-15{
+.margin-15 {
   margin: 15px 20px;
 }
 
-image{
+image {
   max-width: 100%;
   max-width: 100%;
 }
-.gap-100{
+.gap-100 {
   gap: 100px;
 }
-.gap-30{
+.gap-30 {
   gap: 30px;
 }
-.gap-50{
+.gap-50 {
   gap: 50px;
 }
 
-.gap-15{
+.gap-15 {
   gap: 15px;
 }
-
