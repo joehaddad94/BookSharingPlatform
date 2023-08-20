@@ -1,0 +1,22 @@
+.navbar-main-container {
+  width: 100%;
+  height: 70px;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 100;
+  border-bottom: 1px solid #ccc;
+  background-color: #8973d1;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.nav-left h1 {
+  color: white;
+}
+
+.nav-right img {
+  width: 40px;
+  height: auto;
+}
