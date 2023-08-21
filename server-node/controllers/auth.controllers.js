@@ -51,11 +51,11 @@ const register = async (req, res) => {
         });
     
         user.save();
-
-        const userWithoutPassword = { ...user.toObject() };
-        delete userWithoutPassword.password;
-    
-        res.status(201).json({ message: "User registered successfully", user: userWithoutPassword});
+        
+        res.status(201).json({ 
+            message: "User registered successfully", 
+            user: user
+        });
         } catch (error) {
         console.error("Error during registration:", error);
         res.status(500).json({ message: "Internal server error" });

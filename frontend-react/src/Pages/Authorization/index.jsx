@@ -52,13 +52,15 @@ const Authorization = () => {
                 }
               }
         } else {
-            console.log("Login:", formData);
+            console.log("jsonData:", jsonData);
             try {
                 const response = await sendRequest({
                   route: "/auth/login",
                   method: requestMethods.POST,
                   data: jsonData
                 });
+                
+                // const data = await response.json();
                 console.log(response.data)
               } catch (error) {
                 console.log(error.response.status);
