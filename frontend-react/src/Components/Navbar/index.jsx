@@ -13,7 +13,8 @@ const Navbar = () => {
             <div className='nav-center'>
                 <SearchBar/>
             </div>
-            <div className='nav-right'>
+            <div className='nav-right flex'>
+                <button>New Post</button>
                 <img src={logOut} alt="Log Out Icon" />
             </div>
         </div>

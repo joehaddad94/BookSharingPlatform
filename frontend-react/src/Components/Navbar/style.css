@@ -12,6 +12,10 @@
   padding: 0 20px;
 }
 
+.nav-right {
+  gap: 30px;
+}
+
 .nav-left h1 {
   color: white;
 }
@@ -19,4 +23,19 @@
 .nav-right img {
   width: 40px;
   height: auto;
+}
+
+.nav-right button {
+  padding: 8px 12px;
+  background-color: #512b81;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 8px;
+}
+
+.nav-right button:hover {
+  background-color: #1f0d5c;
 }

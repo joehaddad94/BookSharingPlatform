@@ -6,7 +6,7 @@
   padding: 10px;
 }
 
-input {
+.search-bar input {
   flex-grow: 1;
   padding: 8px;
   border: 1px solid #ccc;
@@ -14,7 +14,7 @@ input {
   font-size: 16px;
 }
 
-button {
+.search-bar button {
   padding: 8px 12px;
   background-color: #512b81;
   color: white;
@@ -25,6 +25,6 @@ button {
   margin-left: 8px;
 }
 
-button:hover {
+.search-bar button:hover {
   background-color: #1f0d5c;
 }

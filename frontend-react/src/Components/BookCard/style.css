@@ -1,0 +1,121 @@
+.card-container {
+  width: 700px;
+  height: 500px;
+  border-radius: 10px;
+  margin: 20px 0 0 400px;
+  box-shadow: rgba(137, 115, 209, 0.16) 0px 3px 6px,
+    rgba(137, 115, 209, 0.23) 0px 3px 6px;
+}
+
+.top-card {
+  justify-content: space-between;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: rgb(137, 115, 209);
+}
+
+.user-container {
+  align-items: center;
+  gap: 10px;
+}
+
+.user-container h3 {
+  color: white;
+}
+.user-container img {
+  width: 30px;
+  height: auto;
+}
+
+.card-img-container {
+  width: 250px;
+  height: auto;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+.card-img-container img {
+  border-radius: 5px;
+}
+
+.bot-right-card {
+  width: 100%;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.book-info {
+  text-align: left;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.book-title {
+  color: rgb(137, 115, 209);
+}
+
+.book-info p {
+  font-size: 1.2rem;
+}
+
+.top-card button {
+  padding: 8px 12px;
+  background-color: #512b81;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 8px;
+}
+
+.top-card button:hover {
+  background-color: #1f0d5c;
+}
+
+.bot-right-buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.like-button {
+  padding: 8px 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.edit-button {
+  padding: 8px 12px;
+  background-color: #512b81;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.edit-button:hover {
+  background-color: #1f0d5c;
+}
+
+.delete-button {
+  padding: 8px 12px;
+  background-color: #512b81;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.delete-button:hover {
+  background-color: red;
+}

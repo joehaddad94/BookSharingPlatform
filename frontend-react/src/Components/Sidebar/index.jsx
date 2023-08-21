@@ -3,6 +3,7 @@ import './style.css'
 
 import feedIcon from '../../Assets/Images/category.png'
 import searchIcon from '../../Assets/Images/search.png'
+import myPostsIcon from '../../Assets/Images/bookmark.png'
 
 const Sidebar = () => {
     const [activeLink, setActiveLink] = useState(null);
@@ -23,6 +24,10 @@ const Sidebar = () => {
                         <div className={`link flex pointer ${activeLink === 1 ? 'bg-dark-purple' : ''}`} onClick={() => handleLinkClick(1)}>
                             <img src={searchIcon} alt="Search Icon" />
                             <h2>Search</h2>
+                        </div>
+                        <div className={`link flex pointer ${activeLink === 2 ? 'bg-dark-purple' : ''}`} onClick={() => handleLinkClick(2)}>
+                            <img src={myPostsIcon} alt="Search Icon" />
+                            <h2>My Posts</h2>
                         </div>
                     </div>
                 </div>
