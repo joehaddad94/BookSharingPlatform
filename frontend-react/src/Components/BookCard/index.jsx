@@ -4,7 +4,7 @@ import './style.css'
 import Book1 from '../../Assets/Images/book1.jpg'
 import profileUser from '../../Assets/Images/profile-user.png'
 
-const BookCard = () => {
+const BookCard = ({ ShowFollowButton, ShowLikeButton, ShowEditButton, ShowDeleteButton }) => {
     return (
         <div className='card-main-container fullwidth'>
             <div className="card-container">
@@ -13,7 +13,7 @@ const BookCard = () => {
                     <img src={ profileUser} alt="Profile Pic" />
                     <h3>Username</h3>
                 </div>
-                <button className='pointer'>Follow</button>
+                {ShowFollowButton && <button className='pointer'>Follow</button>}
                 </div>
                 <div className="bot-card flex">
                     <div className="bot-left-card">
@@ -34,9 +34,9 @@ const BookCard = () => {
                         </div>
                         <div className="spacer-30"></div>
                         <div className="bot-right-buttons">
-                            <button className="like-button">Like</button>
-                            <button className="edit-button">Edit</button>
-                            <button className="delete-button">Delete</button>
+                            {ShowLikeButton && <button className="like-button">Like</button>}
+                            {ShowEditButton && <button className="edit-button">Edit</button>}
+                            {ShowDeleteButton && <button className="delete-button">Delete</button>}
                         </div>
                     </div>
                 </div>
