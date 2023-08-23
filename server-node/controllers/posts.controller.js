@@ -73,7 +73,9 @@ const deletePost = async (req, res) => {
 
 const getAllPosts = async ( req, res ) => {
     try {
-        const posts = await Post.find().populate("postedBy", "firstName lastName likes");
+        const posts = await Post.find().
+        populate("postedBy", "firstName lastName likes")
+        .sort({ updatedAt: -1 });
 
         res.json(posts);
     } catch (error) {
@@ -82,13 +84,31 @@ const getAllPosts = async ( req, res ) => {
     }
 }
 
+const getMyPosts = async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        const myPosts = await Post.find({ postedBy: userId })
+            .populate("postedBy", "firstName lastName likes")
+            .sort({ updatedAt: -1 });
+
+        res.json(myPosts);
+    } catch (error) {
+        console.error("Error fetching your posts:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+
 const getFollowedPosts = async (req, res) => {
     try {
         const followers = await Follower.find({ followerId: req.user.id });
 
         const followingIds = followers.map(follower => follower.followingId);
         
-        const followedPosts = await Post.find({ postedBy: { $in: followingIds } }).populate("postedBy", "firstName lastName");
+        const followedPosts = await Post.find({ postedBy: { $in: followingIds } })
+            .populate("postedBy", "firstName lastName")
+            .sort({ updatedAt: -1 });;
 
         res.json(followedPosts);
     } catch (error) {
@@ -232,4 +252,6 @@ module.exports = {
     followUser, 
     unFollowUser,
     likePost,
-    disLikePost }
+    disLikePost,
+    getMyPosts
+ }

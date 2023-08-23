@@ -3,7 +3,7 @@ import './style.css';
 import logOut from '../../Assets/Images/log-out.png';
 import SearchBar from '../SearchBar';
 
-const Navbar = ({ openModal, showSearchBar, showNewPostButton }) => {
+const Navbar = ({ openModal, showSearchBar, showNewPostButton, handleSignOut }) => {
     return (
         <div className='navbar-main-container flex'>
             <div className='nav-left'>
@@ -14,7 +14,7 @@ const Navbar = ({ openModal, showSearchBar, showNewPostButton }) => {
             </div>
             <div className='nav-right flex'>
                 {showNewPostButton && <button onClick={openModal}>New Post</button>}
-                <img src={logOut} alt="Log Out Icon" />
+                <img className='pointer' src={logOut} alt="Log Out Icon" onClick={handleSignOut}/>
             </div>
         </div>
     );

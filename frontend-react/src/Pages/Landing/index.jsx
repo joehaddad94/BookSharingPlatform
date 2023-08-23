@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './style.css';
 
+import { useNavigate } from "react-router-dom";
+
+
 import Navbar from '../../Components/Navbar';
 import FeedsPage from '../Feeds/index'
 import SearchPage from '../Search'
@@ -14,7 +17,14 @@ const Landing = () => {
     const [ShowLikeButton, setShowLikeButton] = useState(false);
     const [ShowEditButton, setShowEditButton] = useState(false);
     const [ShowDeleteButton, setShowDeleteButton] = useState(false);
+    const navigation = useNavigate();
 
+    const isAuthenticated = !localStorage.getItem("authToken");
+
+    if (!isAuthenticated) {
+        navigation("/login");
+        return null;
+    }
 
     const handleLinkClick = (index) => {
         setActiveLink(index);
@@ -80,9 +90,14 @@ const Landing = () => {
         myPostsPageBookCardProps = myPostsBookCardProps; 
     }
 
+    const handleSignOut = () => {
+        localStorage.clear();
+        navigation("/");
+    }
+
     return (
         <div>
-            <Navbar {...navbarProps}/>
+            <Navbar {...navbarProps} handleSignOut={handleSignOut}/>
             <div className='body-container flex'>
                 <div className="body-content">
                     {activeLink === 0 && 

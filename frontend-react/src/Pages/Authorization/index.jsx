@@ -4,6 +4,8 @@ import "./style.css"
 import { sendRequest } from "../../Core/config/request";
 import { requestMethods } from "../../Core/enums/requestMethods";
 import { useNavigate } from "react-router-dom";
+import { localStorageAction } from "../../Core/config/localstorage";
+
 
 import userIcon from "../../Assets/Images/user.png"
 import emailIcon from "../../Assets/Images/email.png"
@@ -12,6 +14,7 @@ import passwordIcon from "../../Assets/Images/lock.png"
 const Authorization = () => {
     const [action, setAction] = useState("Login");
     const [signupErrorMessage, setSignupErrorMessage] = useState("");
+    const [signInErrorMessage, setSignInErrorMessage] = useState("");
     const [isErrorDisplayed, setIsErrorDisplayed] = useState(false);
 
     const navigation = useNavigate();
@@ -29,6 +32,7 @@ const Authorization = () => {
         if (isErrorDisplayed) {
             const timeoutId = setTimeout(() => {
                 setSignupErrorMessage("");
+                setSignInErrorMessage("");
                 setIsErrorDisplayed(false);
             }, 2000);
     
@@ -49,23 +53,19 @@ const Authorization = () => {
     }
 
     const handleSubmit = async () => {
-        console.log("JSON ", formData)
         if (action === "Sign Up") {
             try {
                 const response = await sendRequest({
                   route: "/auth/register",
                   method: requestMethods.POST,
                   body: formData
-                });
-                console.log("response: ", response)
+                })
               } catch (error) {
-                console.log(error.response.status);
+                navigation("/");
                 if (error.response.status === 400 && error.response.data.message === "Email already exists") {
                     setSignupErrorMessage("Email already exists");
                     setIsErrorDisplayed(true);
                 }
-                console.log(error.response.status);
-                navigation("/");
               }
         } else {
             try {
@@ -74,13 +74,23 @@ const Authorization = () => {
                   method: requestMethods.POST,
                   body: formData
                 });
-                console.log(response)
+                console.log(response.user)
+                localStorageAction('token', response.token);
+                localStorageAction('firstName', response.user.firstName);
+                localStorageAction('lastName', response.user.lastName);
+                localStorageAction('email', response.user.email);
+                navigation("/Landing");
               } catch (error) {
                 if (error.response.status === 401) {
-                    navigation("/");
+                    if (error.response.data.message === "Incorrect username or password") {
+                        setSignInErrorMessage("Incorrect username or password. Please check your email and password.");
+                        setIsErrorDisplayed(true);
+                    } else {
+                        navigation("/");
+                    }
                 }
               }
-              navigation("/Landing");
+              
         }
         
     }
@@ -136,6 +146,8 @@ const Authorization = () => {
                     </div>
                     {signupErrorMessage && (
                     <div className="error-message">{signupErrorMessage}</div>)}
+                    {signInErrorMessage && (
+                    <div className="error-message">{signInErrorMessage}</div>)}
                     {action === "Login" && (
                         <div className="forgot-password flex center">Forgot your password? <span className='pointer'> Click Here!</span></div>
                     )}
