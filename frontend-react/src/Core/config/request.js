@@ -1,7 +1,7 @@
 import axios from "axios";
 import { localStorageAction } from "./localstorage.js";
 
-axios.defaults.baseURL = "http://127.0.0.1:8000";
+axios.defaults.baseURL = "http://localhost:8000";
 
 export const sendRequest = async ({
   method,
@@ -20,6 +20,7 @@ export const sendRequest = async ({
       method,
       url: route,
       data: body,
+      
     });
 
     return response.data;

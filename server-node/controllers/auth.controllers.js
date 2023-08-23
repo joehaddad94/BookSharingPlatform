@@ -3,13 +3,14 @@ const jwt =require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 
 const login = async (req, res) => {
-    const { email: login, password } = req.body;
-    const user = await User.findOne({ email: login });
+    const { email, password } = req.body;
+    console.log(req.body)
+    const user = await User.findOne({ email });
 
     if (!user) return res.status(404).send({ message: "email/password incorrect" });
 
     const isValid = await bcrypt.compare(password, user.password);
-    if (!isValid) return res.status(404).send({ message: "email/password incorrect" });
+    if (!isValid) return res.status(401).send({ message: "email/password incorrect" });
 
     const token = jwt.sign(
         {   

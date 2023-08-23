@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./style.css"
 
 import { sendRequest } from "../../Core/config/request";
@@ -11,6 +11,9 @@ import passwordIcon from "../../Assets/Images/lock.png"
 
 const Authorization = () => {
     const [action, setAction] = useState("Login");
+    const [signupErrorMessage, setSignupErrorMessage] = useState("");
+    const [isErrorDisplayed, setIsErrorDisplayed] = useState(false);
+
     const navigation = useNavigate();
     
     const initialFormData = {
@@ -21,6 +24,17 @@ const Authorization = () => {
     };
 
     const [formData, setFormData] = useState(initialFormData);
+
+    useEffect(() => {
+        if (isErrorDisplayed) {
+            const timeoutId = setTimeout(() => {
+                setSignupErrorMessage("");
+                setIsErrorDisplayed(false);
+            }, 2000);
+    
+            return () => clearTimeout(timeoutId);
+        }
+    }, [isErrorDisplayed]);
 
     const handleActionChange = () => {
         setAction(action === "Login" ? "Sign Up" : "Login");
@@ -35,39 +49,38 @@ const Authorization = () => {
     }
 
     const handleSubmit = async () => {
-        const jsonData = JSON.stringify(formData);
-        console.log("JSON ", jsonData)
+        console.log("JSON ", formData)
         if (action === "Sign Up") {
             try {
                 const response = await sendRequest({
                   route: "/auth/register",
                   method: requestMethods.POST,
-                  data: jsonData
+                  body: formData
                 });
                 console.log("response: ", response)
               } catch (error) {
                 console.log(error.response.status);
-                if (error.response.status === 401) {
-                  navigation("/");
+                if (error.response.status === 400 && error.response.data.message === "Email already exists") {
+                    setSignupErrorMessage("Email already exists");
+                    setIsErrorDisplayed(true);
                 }
+                console.log(error.response.status);
+                navigation("/");
               }
         } else {
-            console.log("jsonData:", jsonData);
             try {
                 const response = await sendRequest({
                   route: "/auth/login",
                   method: requestMethods.POST,
-                  data: jsonData
+                  body: formData
                 });
-                
-                // const data = await response.json();
-                console.log(response.data)
+                console.log(response)
               } catch (error) {
-                console.log(error.response.status);
                 if (error.response.status === 401) {
-                  navigation("/Landing");
+                    navigation("/");
                 }
               }
+              navigation("/Landing");
         }
         
     }
@@ -121,6 +134,8 @@ const Authorization = () => {
                             onChange={e => handleInputChange("password", e.target.value)}
                             required />
                     </div>
+                    {signupErrorMessage && (
+                    <div className="error-message">{signupErrorMessage}</div>)}
                     {action === "Login" && (
                         <div className="forgot-password flex center">Forgot your password? <span className='pointer'> Click Here!</span></div>
                     )}

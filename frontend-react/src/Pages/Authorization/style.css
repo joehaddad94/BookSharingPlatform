@@ -85,3 +85,7 @@
 span {
   color: #512b81;
 }
+
+.error-message {
+  color: red;
+}

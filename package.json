@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "body-parser": "^1.20.2",
     "react-js-stickynav": "^1.0.2"
   }
 }
