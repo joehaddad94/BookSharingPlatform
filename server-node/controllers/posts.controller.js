@@ -86,9 +86,7 @@ const getAllPosts = async ( req, res ) => {
 
 const getMyPosts = async (req, res) => {
     try {
-        const userId = req.user.id;
-
-        const myPosts = await Post.find({ postedBy: userId })
+        const myPosts = await Post.find({ postedBy: req.user.id })
             .populate("postedBy", "firstName lastName likes")
             .sort({ updatedAt: -1 });
 

@@ -34,9 +34,7 @@ const Landing = () => {
         setModalVisible(true);
       };
     
-      const closeModal = () => {
-        setModalVisible(false);
-      };
+   
 
       const feedsNavbarProps = {
         showSearchBar: false,
@@ -119,8 +117,9 @@ const Landing = () => {
                             activeLink = {activeLink} 
                             handleLinkClick = {handleLinkClick}
                             modalVisible = {modalVisible}
-                            closeModal = {closeModal}
+                            // closeModal = {closeModal}
                             myPostsBookCardProps = {myPostsPageBookCardProps}
+                            setModalVisible = {setModalVisible}
                         />}
                 </div>
             </div>

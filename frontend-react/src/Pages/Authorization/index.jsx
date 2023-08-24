@@ -74,8 +74,9 @@ const Authorization = () => {
                   method: requestMethods.POST,
                   body: formData
                 });
-                console.log(response.user)
+                console.log(response)
                 localStorageAction('token', response.token);
+                localStorageAction('userId', response.user.id);
                 localStorageAction('firstName', response.user.firstName);
                 localStorageAction('lastName', response.user.lastName);
                 localStorageAction('email', response.user.email);
