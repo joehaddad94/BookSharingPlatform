@@ -6,8 +6,8 @@ const postsController = require("../controllers/posts.controller")
 
 
 router.post("/create_post", postsController.createPost)
-router.post("/update_post", postsController.updatePost)
-router.post("/delete_post", postsController.deletePost)
+router.post("/update_post/:id", postsController.updatePost)
+router.delete("/delete_post/:id", postsController.deletePost)
 router.get("/get_all_posts", postsController.getAllPosts)
 router.get("/get_my_posts", postsController.getMyPosts)
 router.get("/get_followed_posts", postsController.getFollowedPosts)

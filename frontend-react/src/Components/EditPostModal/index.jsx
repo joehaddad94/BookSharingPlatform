@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './style.css';
 
-const PostModal = ({ modalVisible, closeModal, handleOverlayClick, handleInputChange, handlePost, formData }) => {
+const EditPostModal = ({ modalVisible, closeModal, handleOverlayClick, handleInputChange, handleEditPost, formData, editPostData }) => {
    
 
     return (
@@ -16,20 +16,20 @@ const PostModal = ({ modalVisible, closeModal, handleOverlayClick, handleInputCh
                                 type="text"
                                 name="bookName"
                                 placeholder="Book Name"
-                                value={formData.bookName}
+                                value={editPostData.bookName}
                                 onChange={handleInputChange}
                             />
                             <input
                                 type="text"
                                 name="author"
                                 placeholder="Author"
-                                value={formData.author}
+                                value={editPostData.author}
                                 onChange={handleInputChange}
                             />
                             <textarea
                                 name="review"
                                 placeholder="Review"
-                                value={formData.review}
+                                value={editPostData.review}
                                 onChange={handleInputChange}
                             />
                             {/* <input
@@ -42,12 +42,12 @@ const PostModal = ({ modalVisible, closeModal, handleOverlayClick, handleInputCh
                                 type="text"
                                 name="picture"
                                 placeholder="Image URL"
-                                value={formData.picture}
+                                value={editPostData.picture}
                                 onChange={handleInputChange}
                             />
 
                             <div className="modal-buttons flex">
-                                <button className="post-button" onClick={handlePost}>Post</button>
+                                <button className="post-button" onClick={() => handleEditPost(editPostData)}>Edit</button>
                                 <button className="close-button" onClick={closeModal}>Cancel</button>
                             </div>
                             
@@ -59,4 +59,4 @@ const PostModal = ({ modalVisible, closeModal, handleOverlayClick, handleInputCh
     );
 }
 
-export default PostModal;
+export default EditPostModal;

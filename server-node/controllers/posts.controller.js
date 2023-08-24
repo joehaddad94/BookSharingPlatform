@@ -31,7 +31,6 @@ const updatePost = async (req, res) => {
     try {
         const postId = req.params.id;
         const { bookName, author, picture, review } = req.body;
-       
         const post = await Post.findById(postId);
 
         if (!post) {
@@ -56,20 +55,19 @@ const deletePost = async (req, res) => {
     try {
         const postId = req.params.id;
 
-        const post = await Post.findById(postId);
+        const deletedPost = await Post.deleteOne({ _id: postId });
 
-        if (!post) {
+        if (deletedPost.deletedCount === 0) {
             return res.status(404).json({ message: "Post not found." });
         }
- 
-        await post.remove();
 
         res.json({ message: "Post deleted successfully." });
     } catch (error) {
         console.error("Error deleting post:", error);
         res.status(500).json({ message: "Internal server error" });
     }
-}
+};
+
 
 const getAllPosts = async ( req, res ) => {
     try {

@@ -4,13 +4,13 @@ import './style.css'
 import Book1 from '../../Assets/Images/book1.jpg'
 import profileUser from '../../Assets/Images/profile-user.png'
 
-const BookCard = ({ ShowFollowButton, ShowLikeButton, ShowEditButton, ShowDeleteButton, followedPostsData, allPostsData, myPostsData }) => {
+const BookCard = ({ ShowFollowButton, ShowLikeButton, ShowEditButton, ShowDeleteButton, followedPostsData, allPostsData, myPostsData, handleDeletePost, openEditPostModal }) => {
     const dataToRender = followedPostsData || allPostsData || myPostsData || [];
-    console.log(dataToRender) 
+    // console.log(dataToRender) 
     return (
         <div className='card-main-container fullwidth'>
             {dataToRender.map((item, index) => {
-                console.log('post',item);
+                {/* console.log('post',item); */}
                 return (
                     <div className="card-container" key={item._id}>
                         <div className="top-card flex">
@@ -44,8 +44,8 @@ const BookCard = ({ ShowFollowButton, ShowLikeButton, ShowEditButton, ShowDelete
                                     {ShowLikeButton &&
                                     <button className="like-button">Like</button>}
                                     </div>
-                                    {ShowEditButton && <button className="edit-button">Edit</button>}
-                                    {ShowDeleteButton && <button className="delete-button">Delete</button>}
+                                    {ShowEditButton && <button className="edit-button" onClick = {() => openEditPostModal(item)}>Edit</button>}
+                                    {ShowDeleteButton && <button className="delete-button" onClick= {() => handleDeletePost(item._id)}>Delete</button>}
                                 </div>
                             </div>
                         </div>
