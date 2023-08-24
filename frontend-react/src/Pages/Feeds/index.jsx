@@ -8,27 +8,12 @@ import { requestMethods } from "../../Core/enums/requestMethods";
 import Sidebar from '../../Components/Sidebar';
 import BookCard from '../../Components/BookCard';
 
-const Feeds = ({ activeLink, handleLinkClick, feedsBookCardProps }) => {
-    const [followedPostsData, setFollowedPostsData] = useState([]);
+const Feeds = ({ activeLink, handleLinkClick, feedsBookCardProps, fetchFollowedPosts, followedPostsData }) => {
+    
     const navigation = useNavigate();
 
     useEffect(()=>{
-        const fetchData = async () => {
-            try {
-                const response = await sendRequest({
-                    route:"/posts/get_followed_posts",
-                    method: requestMethods.GET,
-                });
-                console.log(response)
-                setFollowedPostsData(response)
-            } catch (error) {
-                console.log(error.response.status);
-                if (error.response.status === 401) {
-                navigation("/");
-                }
-            }
-        }
-        fetchData();
+        fetchFollowedPosts();
     },[])
 
     return (

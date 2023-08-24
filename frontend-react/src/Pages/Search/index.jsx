@@ -9,13 +9,12 @@ import { useState, useEffect } from 'react';
 import Sidebar from '../../Components/Sidebar';
 import BookCard from '../../Components/BookCard';
 
-const SearchPage = ({ activeLink, handleLinkClick, searchBookCardProps, onSearch, fetchData, allPostsData, filteredPostsData }) => {
+const SearchPage = ({ activeLink, handleLinkClick, searchBookCardProps, onSearch, fetchAllPosts, allPostsData, filteredPostsData, followedPostsData, onFollow }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const navigation = useNavigate();
 
     useEffect(()=>{
-        
-        fetchData();
+        fetchAllPosts();
     },[])
 
     useEffect(() => {
@@ -37,6 +36,8 @@ const SearchPage = ({ activeLink, handleLinkClick, searchBookCardProps, onSearch
                         <BookCard
                             {...searchBookCardProps} 
                             allPostsData={filteredPostsData}
+                            onFollow={onFollow}
+                            // followedPostsData = {followedPostsData}
                         />
                     ) : (
                         <BookCard

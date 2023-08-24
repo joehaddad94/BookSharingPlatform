@@ -21,6 +21,7 @@ const Landing = () => {
     const [ShowDeleteButton, setShowDeleteButton] = useState(false);
     const [allPostsData, setAllPostsData] = useState([]);
     const [filteredPostsData, setFilteredPostsData] = useState([]);
+    const [followedPostsData, setFollowedPostsData] = useState([]);
     const navigation = useNavigate();
 
     const isAuthenticated = !localStorage.getItem("authToken");
@@ -97,7 +98,7 @@ const Landing = () => {
         navigation("/");
     }
 
-    const fetchData = async () => {
+    const fetchAllPosts = async () => {
         try {
             const response = await sendRequest({
                 route:"/posts/get_all_posts",
@@ -106,6 +107,22 @@ const Landing = () => {
             // console.log(response);
             setAllPostsData(response);
             setFilteredPostsData(response);
+        } catch (error) {
+            console.log(error.response.status);
+            if (error.response.status === 401) {
+            navigation("/");
+            }
+        }
+    }
+
+    const fetchFollowedPosts = async () => {
+        try {
+            const response = await sendRequest({
+                route:"/posts/get_followed_posts",
+                method: requestMethods.GET,
+            });
+            console.log('followedPosts: ', response)
+            setFollowedPostsData(response)
         } catch (error) {
             console.log(error.response.status);
             if (error.response.status === 401) {
@@ -127,6 +144,25 @@ const Landing = () => {
         console.log('filteredPostsData', filteredPostsData)
     };
     
+    const handleFollow = async (postId) => {
+        try {
+          const response = await sendRequest({
+            route: '/posts/follow_user',
+            method: requestMethods.POST,
+            body: { userIdToFollow: postId }
+          });
+      
+          console.log(response.message);
+         
+          const updatedPosts = allPostsData.map(post => 
+            post._id === postId ? { ...post, isFollowed: true } : post
+          );
+      
+          setAllPostsData(updatedPosts);
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
     return (
         <div>
@@ -140,7 +176,9 @@ const Landing = () => {
                         <FeedsPage 
                             activeLink = {activeLink} 
                             handleLinkClick = {handleLinkClick}
-                            feedsBookCardProps = {feedsPageBookCardProps} 
+                            feedsBookCardProps = {feedsPageBookCardProps}
+                            followedPostsData = {followedPostsData}
+                            fetchFollowedPosts = {fetchFollowedPosts} 
                         />}
 
                     {activeLink === 1 && 
@@ -148,10 +186,12 @@ const Landing = () => {
                             activeLink = {activeLink}
                             handleLinkClick = {handleLinkClick}
                             searchBookCardProps = {searchPageBookCardProps}
-                            fetchData = {fetchData} 
+                            fetchAllPosts = {fetchAllPosts} 
                             allPostsData = {allPostsData}
                             filteredPostsData = {filteredPostsData}
+                            followedPostsData = {followedPostsData}
                             onSearch={handleSearch}
+                            onFollow={handleFollow}
                         />}
 
                     {activeLink === 2 && 

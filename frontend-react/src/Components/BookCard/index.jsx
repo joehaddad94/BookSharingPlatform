@@ -1,15 +1,18 @@
 import React from 'react';
 import './style.css'
 
-import Book1 from '../../Assets/Images/book1.jpg'
 import profileUser from '../../Assets/Images/profile-user.png'
 
-const BookCard = ({ ShowFollowButton, ShowLikeButton, ShowEditButton, ShowDeleteButton, followedPostsData, allPostsData, myPostsData, handleDeletePost, openEditPostModal, filteredPostsData }) => {
+const BookCard = ({ ShowFollowButton, ShowLikeButton, ShowEditButton, ShowDeleteButton, followedPostsData, allPostsData, myPostsData, handleDeletePost, openEditPostModal, filteredPostsData, onFollow }) => {
     const dataToRender = followedPostsData || filteredPostsData || allPostsData || myPostsData || [];
-    // console.log(dataToRender) 
+    console.log(dataToRender)
     return (
         <div className='card-main-container fullwidth'>
             {dataToRender.map((item, index) => {
+                {/* const isFollowed = followedPostsData?.some(post => post._id === item._id);
+                console.log('item._id:', item._id);
+                console.log('followedPostsData:', followedPostsData);
+                console.log('isFollowed:', isFollowed); */}
                 {/* console.log('post',item); */}
                 return (
                     <div className="card-container" key={item._id}>
@@ -18,7 +21,7 @@ const BookCard = ({ ShowFollowButton, ShowLikeButton, ShowEditButton, ShowDelete
                                 <img src={profileUser} alt="Profile Pic" />
                                 <h3>{item.postedBy.firstName} {item.postedBy.lastName}</h3>
                             </div>
-                            {ShowFollowButton && <button className='pointer'>Follow</button>}
+                            {ShowFollowButton && <button className='pointer' onClick={() => onFollow(item._id)}>Follow</button>}
                         </div>
                         <div className="bot-card flex">
                             <div className="bot-left-card">
