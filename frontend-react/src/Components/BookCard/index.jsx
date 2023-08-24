@@ -1,11 +1,23 @@
 import React from 'react';
 import './style.css'
 
+import emptyStateImage from '../../Assets/Images/preview.png'
 import profileUser from '../../Assets/Images/profile-user.png'
 
 const BookCard = ({ ShowFollowButton, ShowLikeButton, ShowEditButton, ShowDeleteButton, followedPostsData, allPostsData, myPostsData, handleDeletePost, openEditPostModal, filteredPostsData, onFollow }) => {
     const dataToRender = followedPostsData || filteredPostsData || allPostsData || myPostsData || [];
-    console.log(dataToRender)
+    // console.log(dataToRender)
+
+    if (dataToRender.length === 0) {
+        // Render the empty state image and message
+        return (
+          <div className='empty-state'>
+            <img src={emptyStateImage} alt="Empty State" />
+            <p>No book cards to display.</p>
+          </div>
+        );
+      }
+
     return (
         <div className='card-main-container fullwidth'>
             {dataToRender.map((item, index) => {

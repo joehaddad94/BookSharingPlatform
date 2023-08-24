@@ -120,3 +120,11 @@
 .delete-button:hover {
   background-color: red;
 }
+
+.empty-state {
+  margin: 20px 0 0 400px;
+  /* margin: 0 auto; */
+
+  width: 30%;
+  height: auto;
+}
