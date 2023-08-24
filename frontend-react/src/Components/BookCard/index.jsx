@@ -39,9 +39,10 @@ const BookCard = ({ ShowFollowButton, ShowLikeButton, ShowEditButton, ShowDelete
                                 </div>
                                 <div className="spacer-30"></div>
                                 <div className="bot-right-buttons">
-                                    <div className="likes">
-                                    {item.likesCount}
-                                    {ShowLikeButton && <button className="like-button">Like</button>}
+                                    <div className="likes flex">
+                                    {ShowLikeButton && <p>{item.likesCount}</p>} 
+                                    {ShowLikeButton &&
+                                    <button className="like-button">Like</button>}
                                     </div>
                                     {ShowEditButton && <button className="edit-button">Edit</button>}
                                     {ShowDeleteButton && <button className="delete-button">Delete</button>}
