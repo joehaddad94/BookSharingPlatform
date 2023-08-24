@@ -10,6 +10,7 @@ import Navbar from '../../Components/Navbar';
 import FeedsPage from '../Feeds/index'
 import SearchPage from '../Search'
 import MyPosts from '../MyPosts'
+import RightSideBar from '../../Components/RightSideBar';
 
 
 const Landing = () => {
@@ -203,6 +204,9 @@ const Landing = () => {
                             myPostsBookCardProps = {myPostsPageBookCardProps}
                             setModalVisible = {setModalVisible}
                         />}
+                </div>
+                <div className="right-sidebar">
+                    <RightSideBar/>
                 </div>
             </div>
         </div>

@@ -1,1 +1,11 @@
+.body-container {
+    justify-content: space-between;
+}
 
+.right-sidebar {
+    position: fixed;
+    top: 9.5%;
+    right: 0;
+    width: 370px;
+    height: 100%; 
+}

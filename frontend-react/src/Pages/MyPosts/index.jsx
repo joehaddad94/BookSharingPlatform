@@ -13,6 +13,7 @@ import Sidebar from '../../Components/Sidebar';
 import BookCard from '../../Components/BookCard';
 import PostModal from '../../Components/PostModal';
 import EditPostModal from '../../Components/EditPostModal'
+import RightSideBar from '../../Components/RightSideBar';
 
 const MyPosts = ({ activeLink, handleLinkClick, modalVisible, myPostsBookCardProps, setModalVisible }) => {
 
@@ -156,6 +157,7 @@ const handleEditPost = async(editPostData) => {
                         handleLinkClick = {handleLinkClick} 
                     />
                 </div>
+                
                 <div className="body-bookcard">
                     <BookCard {...myPostsBookCardProps} 
                         myPostsData = {myPostsData}
@@ -163,6 +165,7 @@ const handleEditPost = async(editPostData) => {
                         openEditPostModal = {openEditPostModal}
                         />
                 </div>
+                
             </div>
             {modalVisible && <PostModal 
                     closeModal={closeModal} 
@@ -185,6 +188,7 @@ const handleEditPost = async(editPostData) => {
                         handleEditPost = {handleEditPost}
                             />
                         )}
+                
         </div>
     );
 }
