@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './style.css';
 
 import { useNavigate } from "react-router-dom";
+import { sendRequest } from "../../Core/config/request"
+import { requestMethods } from "../../Core/enums/requestMethods";
 
 
 import Navbar from '../../Components/Navbar';
@@ -17,6 +19,8 @@ const Landing = () => {
     const [ShowLikeButton, setShowLikeButton] = useState(false);
     const [ShowEditButton, setShowEditButton] = useState(false);
     const [ShowDeleteButton, setShowDeleteButton] = useState(false);
+    const [allPostsData, setAllPostsData] = useState([]);
+    const [filteredPostsData, setFilteredPostsData] = useState([]);
     const navigation = useNavigate();
 
     const isAuthenticated = !localStorage.getItem("authToken");
@@ -93,9 +97,43 @@ const Landing = () => {
         navigation("/");
     }
 
+    const fetchData = async () => {
+        try {
+            const response = await sendRequest({
+                route:"/posts/get_all_posts",
+                method: requestMethods.GET,
+            });
+            // console.log(response);
+            setAllPostsData(response);
+            setFilteredPostsData(response);
+        } catch (error) {
+            console.log(error.response.status);
+            if (error.response.status === 401) {
+            navigation("/");
+            }
+        }
+    }
+
+    const handleSearch = (query) => {
+        console.log(query)
+        const lowerCaseQuery = query.toLowerCase();
+        const filteredPosts = allPostsData.filter((post) =>
+            post.bookName.toLowerCase().includes(lowerCaseQuery) ||
+            post.author.toLowerCase().includes(lowerCaseQuery) ||
+            post.review.toLowerCase().includes(lowerCaseQuery)
+        );
+        setFilteredPostsData(filteredPosts);
+        console.log('allPostsData', allPostsData)
+        console.log('filteredPostsData', filteredPostsData)
+    };
+    
+
     return (
         <div>
-            <Navbar {...navbarProps} handleSignOut={handleSignOut}/>
+            <Navbar {...navbarProps} 
+                handleSignOut={handleSignOut}
+                onSearch = {handleSearch}
+            />
             <div className='body-container flex'>
                 <div className="body-content">
                     {activeLink === 0 && 
@@ -109,7 +147,11 @@ const Landing = () => {
                         <SearchPage 
                             activeLink = {activeLink}
                             handleLinkClick = {handleLinkClick}
-                            searchBookCardProps = {searchPageBookCardProps} 
+                            searchBookCardProps = {searchPageBookCardProps}
+                            fetchData = {fetchData} 
+                            allPostsData = {allPostsData}
+                            filteredPostsData = {filteredPostsData}
+                            onSearch={handleSearch}
                         />}
 
                     {activeLink === 2 && 

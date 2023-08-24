@@ -9,28 +9,19 @@ import { useState, useEffect } from 'react';
 import Sidebar from '../../Components/Sidebar';
 import BookCard from '../../Components/BookCard';
 
-const SearchPage = ({ activeLink, handleLinkClick, searchBookCardProps }) => {
-    const [allPostsData, setAllPostsData] = useState([]);
+const SearchPage = ({ activeLink, handleLinkClick, searchBookCardProps, onSearch, fetchData, allPostsData, filteredPostsData }) => {
+    const [searchQuery, setSearchQuery] = useState('');
     const navigation = useNavigate();
 
     useEffect(()=>{
-        const fetchData = async () => {
-            try {
-                const response = await sendRequest({
-                    route:"/posts/get_all_posts",
-                    method: requestMethods.GET,
-                });
-                console.log(response)
-                setAllPostsData(response)
-            } catch (error) {
-                console.log(error.response.status);
-                if (error.response.status === 401) {
-                navigation("/");
-                }
-            }
-        }
+        
         fetchData();
     },[])
+
+    useEffect(() => {
+       
+    }, [onSearch, filteredPostsData]);
+
 
     return (
         <div>
@@ -42,7 +33,17 @@ const SearchPage = ({ activeLink, handleLinkClick, searchBookCardProps }) => {
                     />
                     </div>
                 <div className="body-bookcard">
-                    <BookCard {...searchBookCardProps} allPostsData = {allPostsData}/>
+                {filteredPostsData.length > 0 ? (
+                        <BookCard
+                            {...searchBookCardProps} 
+                            allPostsData={filteredPostsData}
+                        />
+                    ) : (
+                        <BookCard
+                            {...searchBookCardProps} 
+                            allPostsData={allPostsData}
+                        />
+                    )}
                 </div>
             </div>
 

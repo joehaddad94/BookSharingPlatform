@@ -4,8 +4,8 @@ import './style.css'
 import Book1 from '../../Assets/Images/book1.jpg'
 import profileUser from '../../Assets/Images/profile-user.png'
 
-const BookCard = ({ ShowFollowButton, ShowLikeButton, ShowEditButton, ShowDeleteButton, followedPostsData, allPostsData, myPostsData, handleDeletePost, openEditPostModal }) => {
-    const dataToRender = followedPostsData || allPostsData || myPostsData || [];
+const BookCard = ({ ShowFollowButton, ShowLikeButton, ShowEditButton, ShowDeleteButton, followedPostsData, allPostsData, myPostsData, handleDeletePost, openEditPostModal, filteredPostsData }) => {
+    const dataToRender = followedPostsData || filteredPostsData || allPostsData || myPostsData || [];
     // console.log(dataToRender) 
     return (
         <div className='card-main-container fullwidth'>
