@@ -23,6 +23,7 @@ const Landing = () => {
     const [allPostsData, setAllPostsData] = useState([]);
     const [filteredPostsData, setFilteredPostsData] = useState([]);
     const [followedPostsData, setFollowedPostsData] = useState([]);
+    const [likedPosts, setLikedPosts] = useState([]);
     const navigation = useNavigate();
 
     const isAuthenticated = !localStorage.getItem("authToken");
@@ -165,6 +166,38 @@ const Landing = () => {
         }
       };
 
+      const handleToggleLike = async (postId) => {
+        try {
+            const response = await sendRequest({
+                route: '/posts/toggle_like',
+                method: requestMethods.POST,
+                body: { postId }
+            });
+    
+            console.log(response.message);
+    
+            const updatedPosts = allPostsData.map(post =>
+                post._id === postId
+                    ? {
+                          ...post,
+                          isLiked: response.isLiked,
+                          likesCount: response.updatedPost.likesCount
+                      }
+                    : post
+            );
+    
+            setFollowedPostsData(updatedPosts);
+
+            const updatedLikedPosts = likedPosts.includes(postId)
+            ? likedPosts.filter(likedId => likedId !== postId)
+            : [...likedPosts, postId];
+            setLikedPosts(updatedLikedPosts);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    
+
     return (
         <div>
             <Navbar {...navbarProps} 
@@ -179,7 +212,9 @@ const Landing = () => {
                             handleLinkClick = {handleLinkClick}
                             feedsBookCardProps = {feedsPageBookCardProps}
                             followedPostsData = {followedPostsData}
-                            fetchFollowedPosts = {fetchFollowedPosts} 
+                            fetchFollowedPosts = {fetchFollowedPosts}
+                            toggleLike = {handleToggleLike} 
+                            likedPosts = {likedPosts}
                         />}
 
                     {activeLink === 1 && 
@@ -200,7 +235,6 @@ const Landing = () => {
                             activeLink = {activeLink} 
                             handleLinkClick = {handleLinkClick}
                             modalVisible = {modalVisible}
-                            // closeModal = {closeModal}
                             myPostsBookCardProps = {myPostsPageBookCardProps}
                             setModalVisible = {setModalVisible}
                         />}

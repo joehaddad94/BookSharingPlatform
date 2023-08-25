@@ -83,9 +83,15 @@
   align-items: flex-end;
 }
 
+.likes {
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+
 .like-button {
   padding: 8px 12px;
-  background-color: #4caf50;
+  background: transparent;
   color: white;
   border: none;
   border-radius: 5px;
@@ -123,8 +129,6 @@
 
 .empty-state {
   margin: 20px 0 0 570px;
-  /* margin: 0 auto; */
-
   width: 30%;
   height: auto;
 }
