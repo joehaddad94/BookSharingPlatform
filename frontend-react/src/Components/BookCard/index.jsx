@@ -9,11 +9,9 @@ const BookCard = ({ ShowFollowButton, ShowLikeButton, ShowEditButton, ShowDelete
     // console.log(dataToRender)
 
     if (dataToRender.length === 0) {
-        // Render the empty state image and message
         return (
           <div className='empty-state'>
             <img src={emptyStateImage} alt="Empty State" />
-            <p>No book cards to display.</p>
           </div>
         );
       }
