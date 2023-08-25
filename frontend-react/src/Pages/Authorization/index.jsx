@@ -55,11 +55,13 @@ const Authorization = () => {
     const handleSubmit = async () => {
         if (action === "Sign Up") {
             try {
+                console.log(formData)
                 const response = await sendRequest({
                   route: "/auth/register",
                   method: requestMethods.POST,
                   body: formData
                 })
+                console.log(response)
               } catch (error) {
                 navigation("/");
                 if (error.response.status === 400 && error.response.data.message === "Email already exists") {

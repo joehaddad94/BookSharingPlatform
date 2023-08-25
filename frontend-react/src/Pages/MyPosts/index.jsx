@@ -142,7 +142,7 @@ const handleEditPost = async(editPostData) => {
 
         console.log(response);
         setIsAlteredPost(true);
-        closeModal();
+        setEditModalVisible(false);
     } catch (error) {
         console.log('Error updating post', error);
     }
