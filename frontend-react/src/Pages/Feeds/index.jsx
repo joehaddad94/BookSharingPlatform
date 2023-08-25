@@ -8,9 +8,10 @@ import { requestMethods } from "../../Core/enums/requestMethods";
 import Sidebar from '../../Components/Sidebar';
 import BookCard from '../../Components/BookCard';
 
-const Feeds = ({ activeLink, handleLinkClick, feedsBookCardProps, fetchFollowedPosts, followedPostsData }) => {
+const Feeds = ({ activeLink, handleLinkClick, feedsBookCardProps, fetchFollowedPosts, followedPostsData, toggleLike, likedPosts  }) => {
     
     const navigation = useNavigate();
+
 
     useEffect(()=>{
         fetchFollowedPosts();
@@ -26,7 +27,11 @@ const Feeds = ({ activeLink, handleLinkClick, feedsBookCardProps, fetchFollowedP
                     />
                 </div>
                 <div className="body-bookcard">
-                    <BookCard {...feedsBookCardProps} followedPostsData = {followedPostsData}/>
+                    <BookCard {...feedsBookCardProps} 
+                    followedPostsData = {followedPostsData}
+                    toggleLike = {toggleLike}
+                    likedPosts = {likedPosts}
+                    />
                 </div>
             </div>
         </div>

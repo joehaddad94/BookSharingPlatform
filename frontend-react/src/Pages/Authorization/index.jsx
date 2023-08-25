@@ -83,17 +83,15 @@ const Authorization = () => {
                 localStorageAction('lastName', response.user.lastName);
                 localStorageAction('email', response.user.email);
                 navigation("/Landing");
-              } catch (error) {
-                if (error.response.status === 401) {
-                    if (error.response.data.message === "Incorrect username or password") {
-                        setSignInErrorMessage("Incorrect username or password. Please check your email and password.");
-                        setIsErrorDisplayed(true);
-                    } else {
-                        navigation("/");
-                    }
+              }catch (error) {
+                if (error.response && error.response.status === 401) {
+                    setSignInErrorMessage("Incorrect username or password.");
+                    setIsErrorDisplayed(true);
+                } else if (error.response.status === 404) {
+                    setSignInErrorMessage("User not found. Please check your email.");
+                    setIsErrorDisplayed(true);
                 }
-              }
-              
+            }
         }
         
     }

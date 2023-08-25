@@ -167,7 +167,7 @@ const unFollowUser = async (req, res) => {
     }
 };
 
-const likePost = async (req, res) => {
+const toggleLikePost = async (req, res) => {
     try {
         const { postId } = req.body;
 
@@ -181,63 +181,32 @@ const likePost = async (req, res) => {
             return res.status(404).json({ message: "Post not found" });
         }
 
-        if (user.likes.includes(postId)) {
-            return res.json({ message: "Post already liked by this user" });
-        }
-
-        if (!user.likes.includes(postId)) {
-            user.likes.push(postId);
-            post.likesCount++;
-            await user.save();
-            await post.save();
-        }
-
-        const updatedPost = await Post.findById(postId);
-
-        res.json({ 
-            message: "Post liked successfully",
-            updatedPost: updatedPost
-        });
-    } catch (error) {
-        console.error("Error liking Post:", error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-};
-
-const disLikePost = async (req, res) => {
-    try {
-        const { postId } = req.body;
-
-        const user = await User.findById(req.user.id);
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
-        }
-
-        const post = await Post.findById(postId);
-        if (!post) {
-            return res.status(404).json({ message: "Post not found" });
-        }
-
-        if (user.likes.includes(postId)) {
+        const isLiked = user.likes.includes(postId);
+        
+        if (isLiked) {
             user.likes.pull(postId);
             post.likesCount--;
-            await user.save();
-            await post.save();
         } else {
-            return res.json({ message: "Post is not liked by this user" });
+            user.likes.push(postId);
+            post.likesCount++;
         }
+        
+        await user.save();
+        await post.save();
 
         const updatedPost = await Post.findById(postId);
 
-        res.json({ 
-            message: "Post disliked successfully",
-            updatedPost: updatedPost
+        res.json({
+            message: isLiked ? "Post unliked successfully" : "Post liked successfully",
+            updatedPost: updatedPost,
+            isLiked: !isLiked
         });
     } catch (error) {
-        console.error("Error disliking Post:", error);
+        console.error("Error toggling Post like:", error);
         res.status(500).json({ message: "Internal server error" });
     }
 };
+
 
 module.exports = { 
     createPost, 
@@ -247,7 +216,6 @@ module.exports = {
     getFollowedPosts, 
     followUser, 
     unFollowUser,
-    likePost,
-    disLikePost,
+    toggleLikePost,
     getMyPosts
  }

@@ -3,8 +3,10 @@ import './style.css'
 
 import emptyStateImage from '../../Assets/Images/preview.png'
 import profileUser from '../../Assets/Images/profile-user.png'
+import likeIcon from '../../Assets/Images/like.png'
+import unLikeIcon from '../../Assets/Images/unlike.png'
 
-const BookCard = ({ ShowFollowButton, ShowLikeButton, ShowEditButton, ShowDeleteButton, followedPostsData, allPostsData, myPostsData, handleDeletePost, openEditPostModal, filteredPostsData, onFollow }) => {
+const BookCard = ({ ShowFollowButton, ShowLikeButton, ShowEditButton, ShowDeleteButton, followedPostsData, allPostsData, myPostsData, handleDeletePost, openEditPostModal, filteredPostsData, onFollow, toggleLike, likedPosts }) => {
     const dataToRender = followedPostsData || filteredPostsData || allPostsData || myPostsData || [];
     // console.log(dataToRender)
 
@@ -51,12 +53,18 @@ const BookCard = ({ ShowFollowButton, ShowLikeButton, ShowEditButton, ShowDelete
                                     <p>"{item.review}"</p>
                                 </div>
                                 <div className="spacer-30"></div>
-                                <div className="bot-right-buttons">
-                                    <div className="likes flex">
-                                    {ShowLikeButton && <p>{item.likesCount}</p>} 
-                                    {ShowLikeButton &&
-                                    <button className="like-button">Like</button>}
+                                <div className="likes flex">
+                                {ShowLikeButton && (
+                                    <>
+                                        <p>{item.likesCount}</p>
+                                        <button className="like-button" onClick={() => toggleLike(item._id)}>
+                                            <img src={likedPosts.includes(item._id) ? likeIcon : unLikeIcon} alt="Like" />
+                                        </button>
+                                    </>
+                                )}
                                     </div>
+                                <div className="bot-right-buttons">
+                                    
                                     {ShowEditButton && <button className="edit-button" onClick = {() => openEditPostModal(item)}>Edit</button>}
                                     {ShowDeleteButton && <button className="delete-button" onClick= {() => handleDeletePost(item._id)}>Delete</button>}
                                 </div>
