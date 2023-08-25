@@ -1,9 +1,27 @@
 
 .right-sidebar-main-container{
     position: fixed;
-      width: 300px;
+      width: 400px;
       height: 100vh;
       border-right: 1px solid #ccc;
       background-color: #8973d1;
-      border-top-right-radius: 5px;
+      border-top-left-radius: 10px;
+      
+}
+
+.sidebar-content {
+    color: white;
+    gap: 30px;
+    padding-left: 15px;
+    
+}
+
+.sidebar-content h1 {
+   text-decoration: underline;
+}
+
+.sidebar-content li {
+    list-style: none;
+    font-size: 1.2rem;
+    padding-bottom: 15px;
 }

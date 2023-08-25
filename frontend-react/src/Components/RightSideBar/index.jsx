@@ -5,6 +5,8 @@ const RightSideBar = () => {
 
     return(
         <div className='right-sidebar-main-container'>
+            <div className="sidebar-content flex column">
+                <div></div>
             <h1>Top 10 Books 2023</h1>
             <ul>
                 <li><strong>To Kill a Mockingbird</strong> by Harper Lee</li>
@@ -18,6 +20,7 @@ const RightSideBar = () => {
                 <li><strong>The Handmaid's Tale</strong> by Margaret Atwood</li>
                 <li><strong>The Alchemist</strong> by Paulo Coelho</li>
             </ul>
+            </div>
         </div>
     )
 }
