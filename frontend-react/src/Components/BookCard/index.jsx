@@ -8,7 +8,7 @@ import unLikeIcon from '../../Assets/Images/unlike.png'
 
 const BookCard = ({ ShowFollowButton, ShowLikeButton, ShowEditButton, ShowDeleteButton, followedPostsData, allPostsData, myPostsData, handleDeletePost, openEditPostModal, filteredPostsData, onFollow, toggleLike, likedPosts }) => {
     const dataToRender = followedPostsData || filteredPostsData || allPostsData || myPostsData || [];
-    // console.log(dataToRender)
+    console.log(dataToRender)
 
     if (dataToRender.length === 0) {
         return (
